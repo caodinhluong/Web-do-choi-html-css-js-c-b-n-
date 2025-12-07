@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - BookVerse Haven</title>
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#111827',
+              secondary: '#f3f4f6',
+              accent: '#4f46e5',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+      }
+      .payment-method {
+        transition: all 0.3s ease;
+      }
+      .payment-method:hover {
+        background-color: #f9fafb;
+      }
+    </style>
+</head>
+<body class="bg-secondary">
+    <!-- Navigation -->
+    <nav class="bg-primary text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="Home.html" class="text-2xl font-bold flex items-center">
+                        <i data-feather="book-open" class="mr-2"></i>
+                        Minh Hải
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="Home.html" class="hover:text-accent transition">Trang chủ</a>
+                    <div class="relative group">
+                        <button class="hover:text-accent transition flex items-center">
+                            Danh mục <i data-feather="chevron-down" class="ml-1 w-4 h-4"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white text-primary shadow-lg rounded-md mt-2 py-2 w-48 z-50">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Văn học</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh tế</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Khoa học</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thiếu nhi</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tâm lý</a>
+                        </div>
+                    </div>
+                    <a href="#" class="hover:text-accent transition">Khuyến mãi</a>
+                    <a href="#" class="hover:text-accent transition">Liên hệ</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hover:text-accent transition">
+                        <i data-feather="search"></i>
+                    </a>
+                    <a href="#" class="hover:text-accent transition">
+                        <i data-feather="user"></i>
+                    </a>
+                    <a href="cart.html" class="hover:text-accent transition relative">
+                        <i data-feather="shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button class="md:hidden focus:outline-none">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center text-sm">
+            <a href="Home.html" class="text-accent hover:underline">Trang chủ</a>
+            <i data-feather="chevron-right" class="w-4 h-4 mx-2 text-gray-400"></i>
+            <a href="cart.html" class="text-accent hover:underline">Giỏ hàng</a>
+            <i data-feather="chevron-right" class="w-4 h-4 mx-2 text-gray-400"></i>
+            <span class="text-gray-600">Thanh toán</span>
+        </div>
+    </div>
+
+    <!-- Checkout Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold mb-6">Thanh toán</h1>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Checkout Form -->
+                <div class="lg:w-2/3">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h2 class="text-xl font-bold mb-4">Thông tin giao hàng</h2>
+                        <form>
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="fullname" class="block text-sm font-medium mb-1">Họ và tên</label>
+                                    <input type="text" id="fullname" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent" placeholder="Nguyễn Văn A">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium mb-1">Số điện thoại</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent" placeholder="0909 123 456">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent" placeholder="email@example.com">
+                            </div>
+                            <div class="mb-4">
+                                <label for="address" class="block text-sm font-medium mb-1">Địa chỉ</label>
+                                <input type="text" id="address" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent" placeholder="123 Đường ABC, Quận XYZ">
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label for="city" class="block text-sm font-medium mb-1">Tỉnh/Thành phố</label>
+                                    <select id="city" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent">
+                                        <option value="">Chọn Tỉnh/TP</option>
+                                        <option value="hcm">TP. Hồ Chí Minh</option>
+                                        <option value="hn">Hà Nội</option>
+                                        <option value="dn">Đà Nẵng</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="district" class="block text-sm font-medium mb-1">Quận/Huyện</label>
+                                    <select id="district" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent">
+                                        <option value="">Chọn Quận/Huyện</option>
+                                        <option value="q1">Quận 1</option>
+                                        <option value="q3">Quận 3</option>
+                                        <option value="q5">Quận 5</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ward" class="block text-sm font-medium mb-1">Phường/Xã</label>
+                                    <select id="ward" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent">
+                                        <option value="">Chọn Phường/Xã</option>
+                                        <option value="p1">Phường 1</option>
+                                        <option value="p2">Phường 2</option>
+                                        <option value="p3">Phường 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="note" class="block text-sm font-medium mb-1">Ghi chú (tùy chọn)</label>
+                                <textarea id="note" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-accent" placeholder="Lưu ý cho người giao hàng..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Phương thức thanh toán</h2>
+                        <div class="space-y-3">
+                            <label class="block payment-method border rounded-lg p-4 cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="radio" name="payment" checked class="mr-3">
+                                    <div>
+                                        <h3 class="font-medium">Thanh toán khi nhận hàng (COD)</h3>
+                                        <p class="text-sm text-gray-500">Thanh toán bằng tiền mặt khi nhận hàng</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="block payment-method border rounded-lg p-4 cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="radio" name="payment" class="mr-3">
+                                    <div>
+                                        <h3 class="font-medium">Chuyển khoản ngân hàng</h3>
+                                        <p class="text-sm text-gray-500">Chuyển khoản qua Internet Banking</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="block payment-method border rounded-lg p-4 cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="radio" name="payment" class="mr-3">
+                                    <div>
+                                        <h3 class="font-medium">Ví điện tử</h3>
+                                        <p class="text-sm text-gray-500">Thanh toán qua Momo, ZaloPay, VNPay</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="block payment-method border rounded-lg p-4 cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="radio" name="payment" class="mr-3">
+                                    <div>
+                                        <h3 class="font-medium">Thẻ tín dụng/Ghi nợ</h3>
+                                        <p class="text-sm text-gray-500">Visa, Mastercard, JCB</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:w-1/3">
+                    <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                        <h2 class="text-xl font-bold mb-4">Đơn hàng của bạn</h2>
+                        <div class="border-b pb-4 mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>Đắc Nhân Tâm x1</span>
+                                <span>79.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span>Nhà Giả Kim x1</span>
+                                <span>89.000đ</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Tôi Tài Giỏi Bạn Cũng Thế x1</span>
+                                <span>99.000đ</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span>Tạm tính</span>
+                                <span>267.000đ</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Giảm giá</span>
+                                <span class="text-green-600">-13.000đ</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Phí vận chuyển</span>
+                                <span>0đ</span>
+                            </div>
+                            <div class="border-t pt-3 flex justify-between font-bold text-lg">
+                                <span>Tổng cộng</span>
+                                <span class="text-accent">254.000đ</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-accent text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition mb-4">
+                            Đặt hàng
+                        </button>
+                        <p class="text-sm text-gray-500 text-center">Bằng cách nhấn "Đặt hàng", bạn đồng ý với <a href="#" class="text-accent hover:underline">Điều khoản dịch vụ</a> của chúng tôi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Minh Hải</h3>
+                    <p class="mb-4">Thiên đường sách cho mọi người</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-accent transition">
+                            <i data-feather="facebook"></i>
+                        </a>
+                        <a href="#" class="hover:text-accent transition">
+                            <i data-feather="instagram"></i>
+                        </a>
+                        <a href="#" class="hover:text-accent transition">
+                            <i data-feather="twitter"></i>
+                        </a>
+                        <a href="#" class="hover:text-accent transition">
+                            <i data-feather="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Thông tin</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Điều khoản dịch vụ</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Trung tâm hỗ trợ</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Liên hệ</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i data-feather="map-pin" class="mr-2 mt-1 w-4 h-4"></i>
+                            123 Đường Sách, Quận 1, TP.HCM
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="mail" class="mr-2 w-4 h-4"></i>
+                            info@bookversehaven.com
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="phone" class="mr-2 w-4 h-4"></i>
+                            0909 123 456
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>© 2023 BookVerse Haven. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => {
+                    m.classList.remove('border-accent');
+                });
+                method.classList.add('border-accent');
+                const radio = method.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+
+        // Initialize feather icons
+        feather.replace();
+    </script>
+</body>
+</html>

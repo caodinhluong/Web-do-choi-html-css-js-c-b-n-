@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KidToyStore - Dashboard Quản Trị</title>
+    <link rel="stylesheet" href="css/Admin.css">
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/Admin.js" defer></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" style="color: white;">
+                <a href="Home.html"><img src="img/logo1.png" alt="ToyStore" class="logo-img1"
+                        style="height: 50px; width: auto; max-height: 100%; vertical-align: middle; transition: all 0.3s ease;"></a>
+                ToyStore
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item active" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Trang Chủ</span>
+                <span class="menu-badge">5</span>
+            </a>
+            <a href="#" class="menu-item" data-page="products">
+                <i class="fas fa-cube"></i>
+                <span>Sản Phẩm</span>
+                <span class="menu-badge">12</span>
+            </a>
+            <a href="#" class="menu-item" data-page="categories">
+                <i class="fas fa-list"></i>
+                <span>Danh Mục</span>
+            </a>
+            <a href="#" class="menu-item" data-page="orders">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Đơn Hàng</span>
+                <span class="menu-badge">3</span>
+            </a>
+            <a href="#" class="menu-item" data-page="users">
+                <i class="fas fa-users"></i>
+                <span>Người Dùng</span>
+                <span class="menu-badge">8</span>
+            </a>
+            <a href="#" class="menu-item" data-page="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Thống Kê</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Cài Đặt</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <div class="topbar-left">
+                <div class="page-title">
+                    <h1 id="pageTitle">Trang Chủ</h1>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm..." id="searchInput">
+                </div>
+
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <div class="notification-badge">3</div>
+                </div>
+
+                <div class="user-account" id="userAccount">
+                    <div class="user-avatar" id="userAvatar">QT</div>
+                    <div class="user-details">
+                        <div class="user-name">Quản Trị Viên</div>
+                        <div class="user-role">Super Admin</div>
+                    </div>
+                    <div class="user-dropdown">
+                        <i class="fas fa-chevron-down" id="userDropdownIcon"></i>
+                    </div>
+                    <div class="user-menu" id="userMenu">
+                        <a href="#" class="user-menu-item">
+                            <i class="fas fa-user"></i>
+                            <span>Thông tin cá nhân</span>
+                        </a>
+                        <a href="#" class="user-menu-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Cài đặt tài khoản</span>
+                        </a>
+                        <a href="#" class="user-menu-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Trợ giúp</span>
+                        </a>
+                        <div class="menu-divider"></div>
+                        <a href="#" class="user-menu-item">
+                            <i class="fas fa-moon"></i>
+                            <span>Chế độ tối</span>
+                            <div class="theme-switch">
+                                <input type="checkbox" id="darkModeToggle" class="theme-toggle">
+                                <label for="darkModeToggle" class="theme-toggle-label"></label>
+                            </div>
+                        </a>
+                        <div class="menu-divider"></div>
+                        <div class="user-menu-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng xuất</span>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- ĐÃ SỬA: Thêm thẻ đóng cho topbar-right -->
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page-content active">
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Tổng Doanh Thu</h3>
+                            <p>245.8M VNĐ</p>
+                            <span><i class="fas fa-arrow-up"></i> 12.5%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Tổng Đơn Hàng</h3>
+                            <p>1,248</p>
+                            <span><i class="fas fa-arrow-up"></i> 8.2%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Sản Phẩm</h3>
+                            <p>356</p>
+                            <span><i class="fas fa-arrow-up"></i> 5.3%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Khách Hàng</h3>
+                            <p>2,847</p>
+                            <span><i class="fas fa-arrow-up"></i> 15.7%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Doanh Thu Theo Tháng</h3>
+                            <div class="chart-actions">
+                                <select id="chartPeriod">
+                                    <option value="year">Năm 2024</option>
+                                    <option value="month">6 Tháng Gần Nhất</option>
+                                    <option value="week">Tuần Này</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="top-products">
+                        <div class="top-products-header">
+                            <h3>Sản Phẩm Bán Chạy</h3>
+                        </div>
+                        <div class="top-products-list">
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Xe Điều Khiển Từ Xa</h4>
+                                    <p>Đồ chơi công nghệ</p>
+                                </div>
+                                <div class="product-sales">
+                                    <p>142 lượt</p>
+                                    <span><i class="fas fa-arrow-up"></i> 24%</span>
+                                </div>
+                            </div>
+
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Xếp Hình Thông Minh</h4>
+                                    <p>Đồ chơi giáo dục</p>
+                                </div>
+                                <div class="product-sales">
+                                    <p>128 lượt</p>
+                                    <span><i class="fas fa-arrow-up"></i> 18%</span>
+                                </div>
+                            </div>
+
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Robot Biến Hình</h4>
+                                    <p>Đồ chơi hành động</p>
+                                </div>
+                                <div class="product-sales">
+                                    <p>98 lượt</p>
+                                    <span><i class="fas fa-arrow-up"></i> 12%</span>
+                                </div>
+                            </div>
+
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <i class="fas fa-baby"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Búp Bê Biết Nói</h4>
+                                    <p>Đồ chơi cho bé gái</p>
+                                </div>
+                                <div class="product-sales">
+                                    <p>87 lượt</p>
+                                    <span><i class="fas fa-arrow-up"></i> 9%</span>
+                                </div>
+                            </div>
+
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Bộ Lắp Ghép LEGO</h4>
+                                    <p>Đồ chơi sáng tạo</p>
+                                </div>
+                                <div class="product-sales">
+                                    <p>76 lượt</p>
+                                    <span><i class="fas fa-arrow-up"></i> 7%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="recent-orders">
+                    <div class="recent-orders-header">
+                        <h3>Đơn Hàng Gần Đây</h3>
+                        <a href="#" data-page="orders">Xem Tất Cả</a>
+                    </div>
+
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Mã ĐH</th>
+                                <th>Khách Hàng</th>
+                                <th>Ngày Đặt</th>
+                                <th>Tổng Tiền</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersBody">
+                            <!-- Orders sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div id="products" class="page-content">
+                <div class="page-header">
+                    <h2>Quản Lý Sản Phẩm</h2>
+                    <button class="btn-primary" id="addProductBtn">
+                        <i class="fas fa-plus"></i> Thêm Sản Phẩm
+                    </button>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã SP</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Danh Mục</th>
+                                <th>Giá Bán</th>
+                                <th>Tồn Kho</th>
+                                <th>Đã Bán</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Products sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Trong phần Dashboard - Top Products -->
+            <div class="top-products">
+                <div class="top-products-header">
+                    <h3>Sản Phẩm Bán Chạy</h3>
+                </div>
+                <div class="top-products-list">
+                    <!-- Top products sẽ được thêm bằng JavaScript -->
+                </div>
+            </div>
+            <!-- Categories Page -->
+            <div id="categories" class="page-content">
+                <div class="page-header">
+                    <h2>Quản Lý Danh Mục</h2>
+                    <button class="btn-primary" id="addCategoryBtn">
+                        <i class="fas fa-plus"></i> Thêm Danh Mục
+                    </button>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Danh Mục</th>
+                                <th>Số Sản Phẩm</th>
+                                <th>Mô Tả</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoriesTableBody">
+                            <!-- Categories sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Orders Page -->
+            <div id="orders" class="page-content">
+                <div class="page-header">
+                    <h2>Quản Lý Đơn Hàng</h2>
+                    <div class="topbar-actions">
+                        <select class="form-control" style="width: 200px;" id="orderStatusFilter">
+                            <option value="all">Tất Cả Trạng Thái</option>
+                            <option value="pending">Chờ Xác Nhận</option>
+                            <option value="processing">Đang Xử Lý</option>
+                            <option value="completed">Đã Giao</option>
+                            <option value="cancelled">Đã Hủy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã ĐH</th>
+                                <th>Khách Hàng</th>
+                                <th>Ngày Đặt</th>
+                                <th>Sản Phẩm</th>
+                                <th>Tổng Tiền</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Orders sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                </div>
+            </div>
+
+            <!-- Users Page -->
+            <div id="users" class="page-content">
+                <div class="page-header">
+                    <h2>Quản Lý Người Dùng</h2>
+                    <button class="btn-primary" id="addUserBtn">
+                        <i class="fas fa-plus"></i> Thêm Người Dùng
+                    </button>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ Tên</th>
+                                <th>Email</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Vai Trò</th>
+                                <th>Ngày Tham Gia</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Page -->
+            <div id="reports" class="page-content">
+                <div class="page-header">
+                    <h2>Báo Cáo & Thống Kê</h2>
+                    <div class="topbar-actions">
+                        <button class="btn-primary" id="exportReportBtn">
+                            <i class="fas fa-download"></i> Xuất Báo Cáo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trong phần Dashboard Page -->
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Doanh Thu Theo Tháng (2024)</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="top-products">
+                        <div class="top-products-header">
+                            <h3>Top Sản Phẩm Bán Chạy</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trong phần Reports Page -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Doanh Thu Theo Danh Mục</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Phân Bố Đơn Hàng Theo Trạng Thái</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="ordersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Doanh Thu Tháng Này</h3>
+                            <p>68.5M VNĐ</p>
+                            <span><i class="fas fa-arrow-up"></i> 15.2%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Đơn Hàng Tháng Này</h3>
+                            <p>342</p>
+                            <span><i class="fas fa-arrow-up"></i> 9.8%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Khách Hàng Mới</h3>
+                            <p>128</p>
+                            <span><i class="fas fa-arrow-up"></i> 22.5%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Tỷ Lệ Hoàn Thành</h3>
+                            <p>94.7%</p>
+                            <span><i class="fas fa-arrow-up"></i> 3.1%</span>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Product Modal -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <i class="fas fa-cube modal-icon"></i>
+                    <div>
+                        <h3 id="productModalTitle">Thêm Sản Phẩm Mới</h3>
+                        <p id="productModalSubtitle">Điền thông tin chi tiết cho sản phẩm</p>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeProductModal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+
+                    <!-- Basic Information Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Thông Tin Cơ Bản</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">
+                                    Tên Sản Phẩm *
+                                    <span class="field-required"></span>
+                                </label>
+                                <input type="text" id="productName" class="form-control"
+                                    placeholder="Ví dụ: Xe điều khiển từ xa 2.4GHz" required>
+                                <small class="field-help">Tên sản phẩm sẽ hiển thị trên website</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">
+                                    Danh Mục *
+                                    <span class="field-required"></span>
+                                </label>
+                                <select id="productCategory" class="form-control" required>
+                                    <option value="">Chọn danh mục</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productCode">Mã Sản Phẩm</label>
+                            <div class="input-group">
+                                <input type="text" id="productCode" class="form-control" placeholder="TOY001" readonly>
+                                <button type="button" class="btn-secondary btn-sm" id="generateCodeBtn">
+                                    <i class="fas fa-magic"></i> Tự Động
+                                </button>
+                            </div>
+                            <small class="field-help">Mã sản phẩm sẽ được tạo tự động nếu để trống</small>
+                        </div>
+                    </div>
+
+                    <!-- Pricing & Inventory Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-tags"></i>
+                            <h4>Giá Bán & Tồn Kho</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productPrice">
+                                    Giá Bán (VNĐ) *
+                                    <span class="field-required"></span>
+                                </label>
+                                <input type="number" id="productPrice" class="form-control" placeholder="450000" min="0"
+                                    required>
+                                <small class="field-help">Giá bán lẻ cho khách hàng</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="productOldPrice">Giá Gốc (VNĐ)</label>
+                                <input type="number" id="productOldPrice" class="form-control" placeholder="550000"
+                                    min="0">
+                                <small class="field-help">Giá gốc để hiển thị giảm giá (tùy chọn)</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productStock">
+                                    Số Lượng Tồn Kho *
+                                    <span class="field-required"></span>
+                                </label>
+                                <input type="number" id="productStock" class="form-control" placeholder="50" min="0"
+                                    required>
+                                <small class="field-help">Số lượng sản phẩm hiện có trong kho</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="productMinStock">Cảnh Báo Tồn Kho</label>
+                                <input type="number" id="productMinStock" class="form-control" placeholder="10" min="0"
+                                    value="10">
+                                <small class="field-help">Cảnh báo khi tồn kho thấp hơn mức này</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media & Description Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-images"></i>
+                            <h4>Hình Ảnh & Mô Tả</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="productImage">Hình Ảnh Sản Phẩm</label>
+                                <div class="image-upload-area" id="imageUploadArea">
+                                    <div class="image-upload-placeholder">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Kéo thả hình ảnh vào đây hoặc click để chọn</p>
+                                        <small>PNG, JPG, JPEG tối đa 5MB</small>
+                                    </div>
+                                    <input type="file" id="productImage" accept="image/*" style="display: none;">
+                                    <div class="image-preview" id="imagePreview" style="display: none;">
+                                        <img id="previewImg" src="" alt="Preview">
+                                        <button type="button" class="remove-image" id="removeImageBtn">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">
+                                Mô Tả Chi Tiết
+                                <span class="field-optional">(Tùy chọn)</span>
+                            </label>
+                            <textarea id="productDescription" class="form-control" rows="4"
+                                placeholder="Mô tả chi tiết về sản phẩm, tính năng, cách sử dụng..."></textarea>
+                            <small class="field-help">Mô tả sẽ giúp khách hàng hiểu rõ hơn về sản phẩm</small>
+                        </div>
+                    </div>
+
+                    <!-- Status & Settings Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-cog"></i>
+                            <h4>Trạng Thái & Cài Đặt</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productStatus">Trạng Thái Sản Phẩm</label>
+                                <select id="productStatus" class="form-control">
+                                    <option value="active">Đang Bán</option>
+                                    <option value="inactive">Ngừng Bán</option>
+                                    <option value="out_of_stock">Hết Hàng</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="productFeatured">Sản Phẩm Nổi Bật</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="productFeatured" class="toggle-input">
+                                    <label for="productFeatured" class="toggle-label">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <small class="field-help">Hiển thị ở trang chủ và danh mục nổi bật</small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-footer-left">
+                    <button type="button" class="btn-outline" id="previewProductBtn">
+                        <i class="fas fa-eye"></i> Xem Trước
+                    </button>
+                </div>
+                <div class="modal-footer-right">
+                    <button class="btn-secondary" id="cancelProductBtn">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button class="btn-primary" id="saveProductBtn">
+                        <i class="fas fa-save"></i> Lưu Sản Phẩm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Category Modal -->
+    <div class="modal" id="addCategoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">Thêm Danh Mục Mới</h3>
+                <button class="modal-close" id="closeCategoryModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId">
+                    <div class="form-group">
+                        <label for="categoryName">Tên Danh Mục *</label>
+                        <input type="text" id="categoryName" class="form-control" placeholder="Nhập tên danh mục"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryDescription">Mô Tả Danh Mục</label>
+                        <textarea id="categoryDescription" class="form-control" rows="3"
+                            placeholder="Nhập mô tả danh mục"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryStatus">Trạng Thái</label>
+                        <select id="categoryStatus" class="form-control">
+                            <option value="active">Hiển Thị</option>
+                            <option value="inactive">Ẩn</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelCategoryBtn">Hủy</button>
+                <button class="btn-primary" id="saveCategoryBtn">Lưu Danh Mục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Thêm Người Dùng Mới</h3>
+                <button class="modal-close" id="closeUserModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <input type="hidden" id="userId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="userFullName">Họ Tên *</label>
+                            <input type="text" id="userFullName" class="form-control" placeholder="Nhập họ tên"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email *</label>
+                            <input type="email" id="userEmail" class="form-control" placeholder="Nhập email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="userPhone">Số Điện Thoại</label>
+                            <input type="tel" id="userPhone" class="form-control" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label for="userRole">Vai Trò *</label>
+                            <select id="userRole" class="form-control" required>
+                                <option value="customer">Khách Hàng</option>
+                                <option value="admin">Quản Trị</option>
+                                <option value="staff">Nhân Viên</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userStatus">Trạng Thái</label>
+                        <select id="userStatus" class="form-control">
+                            <option value="active">Hoạt động</option>
+                            <option value="inactive">Không hoạt động</option>
+                            <option value="banned">Bị khóa</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelUserBtn">Hủy</button>
+                <button class="btn-primary" id="saveUserBtn">Lưu Người Dùng</button>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="deleteConfirmTitle">Xác nhận xóa</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="deleteConfirmMessage">
+                    <!-- Message will be inserted by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelDeleteBtn">Hủy</button>
+                <button class="btn-danger" id="confirmDeleteBtn">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Status Edit Modal -->
+    <div class="modal" id="editOrderStatusModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cập nhật trạng thái đơn hàng</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-item">
+                    <span class="detail-label">Mã đơn hàng:</span>
+                    <span class="detail-value" id="statusOrderCode"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Khách hàng:</span>
+                    <span class="detail-value" id="statusOrderCustomer"></span>
+                </div>
+                <div class="form-group">
+                    <label for="orderStatusSelect">Trạng thái mới:</label>
+                    <select id="orderStatusSelect" class="form-control">
+                        <option value="pending">Chờ xác nhận</option>
+                        <option value="processing">Đang xử lý</option>
+                        <option value="shipping">Đang giao</option>
+                        <option value="completed">Đã giao</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Hủy</button>
+                <button class="btn-primary" id="saveStatusBtn">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div class="modal" id="orderDetailModal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <i class="fas fa-shopping-cart modal-icon"></i>
+                    <div>
+                        <h3>Chi tiết đơn hàng</h3>
+                        <p id="detailOrderSubtitle">Thông tin chi tiết về đơn hàng</p>
+                    </div>
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Order Header -->
+                <div class="order-detail-header">
+                    <div class="order-info-primary">
+                        <div class="order-code-large" id="detailOrderCode"></div>
+                        <div class="order-date" id="detailOrderDate"></div>
+                        <div class="order-status-large">
+                            <span id="detailOrderStatus" class="order-status"></span>
+                        </div>
+                    </div>
+                    <div class="order-total-large" id="detailOrderTotal"></div>
+                </div>
+
+                <!-- Customer Information -->
+                <div class="detail-card">
+                    <div class="detail-card-header">
+                        <i class="fas fa-user"></i>
+                        <h5>Thông tin khách hàng</h5>
+                    </div>
+                    <div class="detail-card-body">
+                        <div class="customer-info-grid">
+                            <div class="customer-avatar">
+                                <div class="avatar-circle">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="customer-details">
+                                <h6 id="detailOrderCustomer"></h6>
+                                <div class="customer-contact">
+                                    <div class="contact-item">
+                                        <i class="fas fa-phone"></i>
+                                        <span id="detailOrderPhone"></span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span id="detailOrderPayment"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="detail-card">
+                    <div class="detail-card-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h5>Địa chỉ giao hàng</h5>
+                    </div>
+                    <div class="detail-card-body">
+                        <div class="shipping-address" id="detailOrderAddress"></div>
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="detail-card">
+                    <div class="detail-card-header">
+                        <i class="fas fa-box"></i>
+                        <h5>Danh sách sản phẩm (<span id="detailOrderItems"></span> sản phẩm)</h5>
+                    </div>
+                    <div class="detail-card-body">
+                        <div class="order-items-list" id="detailOrderProducts">
+                            <!-- Products will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-card">
+                    <div class="summary-header">
+                        <h5>Tóm tắt đơn hàng</h5>
+                    </div>
+                    <div class="summary-body">
+                        <div class="summary-row">
+                            <span>Tổng sản phẩm:</span>
+                            <span id="summaryItems"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phí vận chuyển:</span>
+                            <span>Miễn phí</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Tổng cộng:</span>
+                            <span id="summaryTotal"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-footer-left">
+                    <button class="btn-outline" id="editOrderStatusFromDetail">
+                        <i class="fas fa-edit"></i> Cập nhật trạng thái
+                    </button>
+                    <button class="btn-outline" id="printOrderDetail">
+                        <i class="fas fa-print"></i> In đơn hàng
+                    </button>
+                </div>
+                <div class="modal-footer-right">
+                    <button class="btn-secondary modal-close">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div class="modal" id="userDetailModal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <i class="fas fa-user modal-icon"></i>
+                    <div>
+                        <h3>Chi tiết người dùng</h3>
+                        <p id="detailUserSubtitle">Thông tin chi tiết về tài khoản</p>
+                    </div>
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- User Profile Header -->
+                <div class="user-profile-header">
+                    <div class="user-avatar-large">
+                        <div class="avatar-circle-large">
+                            <span id="detailUserInitial"></span>
+                        </div>
+                    </div>
+                    <div class="user-info-primary">
+                        <h4 id="detailUserName"></h4>
+                        <div class="user-role-badge">
+                            <span id="detailUserRole" class="role-badge"></span>
+                        </div>
+                        <div class="user-status-indicator">
+                            <span id="detailUserStatus" class="status-indicator"></span>
+                        </div>
+                    </div>
+                    <div class="user-stats-summary">
+                        <div class="stat-box">
+                            <div class="stat-number" id="detailUserOrders">0</div>
+                            <div class="stat-label">Đơn hàng</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="detailUserSpent">0đ</div>
+                            <div class="stat-label">Tổng chi tiêu</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Details Grid -->
+                <div class="user-details-grid">
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-id-card"></i>
+                            <h5>Thông tin cá nhân</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="detail-row">
+                                <span class="detail-label">Họ tên đầy đủ:</span>
+                                <span class="detail-value" id="detailUserFullName"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value" id="detailUserEmail"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Số điện thoại:</span>
+                                <span class="detail-value" id="detailUserPhone"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Ngày tham gia:</span>
+                                <span class="detail-value" id="detailUserJoinDate"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h5>Thống kê hoạt động</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="detail-row">
+                                <span class="detail-label">Tổng đơn hàng:</span>
+                                <span class="detail-value" id="detailUserTotalOrders"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tổng chi tiêu:</span>
+                                <span class="detail-value" id="detailUserTotalSpent"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Đơn hàng gần nhất:</span>
+                                <span class="detail-value" id="detailUserLastOrder"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Trung bình/đơn:</span>
+                                <span class="detail-value" id="detailUserAvgOrder"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders for this user -->
+                <div class="user-recent-orders" id="userRecentOrdersSection" style="display: none;">
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-history"></i>
+                            <h5>Đơn hàng gần đây</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="user-orders-list" id="detailUserRecentOrders">
+                                <!-- Recent orders will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-footer-left">
+                    <button class="btn-outline" id="editUserFromDetail">
+                        <i class="fas fa-edit"></i> Chỉnh sửa
+                    </button>
+                    <button class="btn-outline" id="sendMessageToUser">
+                        <i class="fas fa-envelope"></i> Gửi tin nhắn
+                    </button>
+                </div>
+                <div class="modal-footer-right">
+                    <button class="btn-secondary modal-close">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productDetailModal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <i class="fas fa-cube modal-icon"></i>
+                    <div>
+                        <h3>Chi tiết sản phẩm</h3>
+                        <p id="detailProductSubtitle">Thông tin chi tiết về sản phẩm</p>
+                    </div>
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Product Image Section -->
+                <div class="product-detail-header">
+                    <div class="product-detail-image">
+                        <div id="detailProductImageContainer">
+                            <img id="detailProductImage" src="" alt="Product Image" style="display: none;">
+                            <div id="detailProductIcon" class="product-icon-placeholder">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-detail-basic">
+                        <h4 id="detailProductName"></h4>
+                        <div class="product-meta">
+                            <span class="product-code" id="detailProductCode"></span>
+                            <span class="product-category" id="detailProductCategory"></span>
+                        </div>
+                        <div class="product-price-section">
+                            <div class="current-price" id="detailProductPrice"></div>
+                            <div class="product-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-boxes"></i>
+                                    <span>Tồn kho: <strong id="detailProductStock"></strong></span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Đã bán: <strong id="detailProductSold"></strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Details Grid -->
+                <div class="product-details-grid">
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h5>Thông tin cơ bản</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="detail-row">
+                                <span class="detail-label">Trạng thái:</span>
+                                <span class="detail-value">
+                                    <span id="detailProductStatus" class="status-badge"></span>
+                                </span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Ngày tạo:</span>
+                                <span class="detail-value" id="detailProductCreatedAt"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Cập nhật:</span>
+                                <span class="detail-value" id="detailProductUpdatedAt"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-chart-bar"></i>
+                            <h5>Thống kê</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="detail-row">
+                                <span class="detail-label">Tỷ lệ bán:</span>
+                                <span class="detail-value" id="detailProductSalesRate"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Doanh thu:</span>
+                                <span class="detail-value" id="detailProductRevenue"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Xếp hạng:</span>
+                                <span class="detail-value" id="detailProductRank"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Description -->
+                <div class="product-description-section">
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h5>Mô tả sản phẩm</h5>
+                        </div>
+                        <div class="detail-card-body">
+                            <div id="detailProductDescription" class="product-description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-footer-left">
+                    <button class="btn-outline" id="editProductFromDetail">
+                        <i class="fas fa-edit"></i> Chỉnh sửa
+                    </button>
+                </div>
+                <div class="modal-footer-right">
+                    <button class="btn-secondary modal-close">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - ToyStore</title>
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="Home.html"><img src="img/logo1.png" alt="ToyStore" class="logo-img1" style="height: 50px; width: auto; max-height: 100%; vertical-align: middle; transition: all 0.3s ease;"></a>
+                    ToyStore
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm đồ chơi, thương hiệu...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="login.html" id="login-btn"><i class="fas fa-user"></i> Đăng nhập</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="Home.html">Trang chủ</a></li>
+                    <li><a href="product.html">Đồ chơi mới</a></li>
+                    <li><a href="#">Bán chạy</a></li>
+                    <li><a href="#">Lắp ráp</a></li>
+                    <li><a href="#">Giáo dục</a></li>
+                    <li><a href="#">Ngoài trời</a></li>
+                    <li><a href="#">Thiếu nhi</a></li>
+                    <li><a href="#">Giảm giá</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="cart-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Giỏ Hàng</h1>
+            </div>
+
+            <div class="cart-layout">
+                <!-- Left Column - Cart Items & Summary -->
+                <div class="left-column">
+                    <!-- Cart Items Section -->
+                    <div class="cart-items-section">
+                        <div class="section-header">
+                            <h2>THÔNG TIN ĐƠN HÀNG</h2>
+                        </div>
+                        
+                        <div id="cart-items-container">
+                            <!-- Cart items will be loaded here dynamically -->
+                        </div>
+
+                        <!-- Voucher Section -->
+                        <div class="voucher-section">
+                            <h3>Chọn nhà cung cấp phiếu quà tặng *</h3>
+                            <div class="voucher-options">
+                                <select class="voucher-select">
+                                    <option value="">-- Chọn phiếu quà tặng --</option>
+                                    <option value="1">Phiếu quà tặng 1</option>
+                                    <option value="2">Phiếu quà tặng 2</option>
+                                    <option value="3">Phiếu quà tặng 3</option>
+                                </select>
+                                <button class="apply-voucher">Áp dụng</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary Section -->
+                    <div class="order-summary">
+                        <div class="summary-card">
+                            <h3>TỔNG ĐƠN HÀNG</h3>
+                            
+                            <div class="summary-row">
+                                <span>Tạm tính:</span>
+                                <span id="subtotal">0 VND</span>
+                            </div>
+                            
+                            <div class="summary-row">
+                                <span>Giảm giá:</span>
+                                <span class="discount" id="discount">0 VND</span>
+                            </div>
+                            
+                            <div class="summary-row">
+                                <span>Chi phí vận chuyển:</span>
+                                <span class="free-shipping">Miễn phí</span>
+                            </div>
+                            
+                            <div class="summary-divider"></div>
+                            
+                            <div class="summary-row total">
+                                <span>Thành tiền:</span>
+                                <span class="final-price" id="total">0 VND</span>
+                            </div>
+                            
+                            <p class="vat-note">*Giá tham khảo đã bao gồm VAT</p>
+                            
+                            <button class="checkout-btn" id="checkout-btn">TIẾN HÀNH ĐẶT HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Customer & Shipping Info -->
+                <div class="right-column">
+                    <!-- Customer Information -->
+                    <div class="customer-info">
+                        <h3>THÔNG TIN KHÁCH HÀNG</h3>
+                        
+                        <div class="info-group">
+                            <label>Họ tên <span class="required">*</span></label>
+                            <input type="text" placeholder="Nhập họ và tên" required>
+                        </div>
+                        
+                        <div class="info-group">
+                            <label>Số điện thoại <span class="required">*</span></label>
+                            <input type="tel" placeholder="Nhập số điện thoại" required>
+                        </div>
+                        
+                        <div class="info-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Nhập email">
+                        </div>
+                        
+                        <div class="info-group">
+                            <label>Thời gian giao hàng</label>
+                            <select>
+                                <option value="">-- Chọn thời gian --</option>
+                                <option value="morning">Sáng (8h - 12h)</option>
+                                <option value="afternoon">Chiều (13h - 17h)</option>
+                                <option value="evening">Tối (18h - 21h)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-group">
+                            <label>Lời nhắn cho người nhận</label>
+                            <textarea placeholder="Nhập lời nhắn..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="shipping-info">
+                        <h3>CHỌN HÌNH THỨC NHẬN HÀNG</h3>
+                        
+                        <div class="shipping-options">
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping" checked>
+                                <span class="checkmark"></span>
+                                Giao hàng tận nơi
+                            </label>
+                            
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping">
+                                <span class="checkmark"></span>
+                                Nhận tại cửa hàng
+                            </label>
+                        </div>
+                        
+                        <div class="address-section">
+                            <h4>Địa chỉ người nhận <span class="required">*</span></h4>
+                            <input type="text" placeholder="Nhập địa chỉ chi tiết" required>
+                        </div>
+                        
+                        <div class="shipping-methods">
+                            <h4>Phương thức vận chuyển:</h4>
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping-method" checked>
+                                <span class="checkmark"></span>
+                                <div class="method-info">
+                                    <span class="method-name">Miễn phí giao hàng nhanh</span>
+                                    <span class="method-desc">Dự kiến nhận hàng: 2-3 ngày sau khi đặt</span>
+                                </div>
+                            </label>
+                            
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping-method">
+                                <span class="checkmark"></span>
+                                <div class="method-info">
+                                    <span class="method-name">Giao hàng hoả tốc</span>
+                                    <span class="method-desc">Nhận ngay khi chọn giao hàng hoả tốc</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="additional-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                Xuất hoá đơn VAT
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Về Chúng Tôi</h3>
+                    <p>ToyStore là cửa hàng đồ chơi trực tuyến hàng đầu, cung cấp đa dạng các loại đồ chơi an toàn và chất lượng cho mọi lứa tuổi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="#">Đồ chơi mới</a></li>
+                        <li><a href="#">Bán chạy</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Chính Sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường Đồ Chơi, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> (028) 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@toystore.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 22:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ToyStore. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lấy giỏ hàng từ localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        // Hiển thị thông báo
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Định dạng số tiền
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' VND';
+        }
+        
+        // Hiển thị sản phẩm trong giỏ hàng
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Giỏ hàng của bạn đang trống</h3>
+                        <p>Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
+                        <a href="Home.html" class="continue-shopping">Tiếp tục mua sắm</a>
+                    </div>
+                `;
+                checkoutBtn.disabled = true;
+                checkoutBtn.style.opacity = '0.6';
+                return;
+            }
+            
+            let html = `
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã SP</th>
+                                <th>Ảnh</th>
+                                <th>Tên SP</th>
+                                <th>Giá (VND)</th>
+                                <th>SL</th>
+                                <th>Thành tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>
+                            <div class="product-image">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                        </td>
+                        <td class="product-name">${item.name}</td>
+                        <td class="product-price">${formatCurrency(item.price)}</td>
+                        <td class="product-quantity">
+                            <div class="quantity-control">
+                                <button class="qty-btn minus" onclick="updateQuantity(${index}, -1)">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="qty-input" onchange="updateQuantityInput(${index}, this.value)">
+                                <button class="qty-btn plus" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </td>
+                        <td class="product-total">${formatCurrency(itemTotal)}</td>
+                        <td class="product-actions">
+                            <button class="remove-btn" onclick="removeFromCart(${index})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            checkoutBtn.disabled = false;
+            checkoutBtn.style.opacity = '1';
+            updateOrderSummary();
+        }
+        
+        // Cập nhật số lượng sản phẩm
+        function updateQuantity(index, change) {
+            const newQuantity = cart[index].quantity + change;
+            
+            if (newQuantity < 1) {
+                removeFromCart(index);
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            saveCart();
+            renderCartItems();
+            showToast('Đã cập nhật số lượng sản phẩm');
+        }
+        
+        // Cập nhật số lượng từ input
+        function updateQuantityInput(index, value) {
+            const newQuantity = parseInt(value);
+            
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                renderCartItems();
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            saveCart();
+            renderCartItems();
+            showToast('Đã cập nhật số lượng sản phẩm');
+        }
+        
+        // Xóa sản phẩm khỏi giỏ hàng
+        function removeFromCart(index) {
+            const productName = cart[index].name;
+            cart.splice(index, 1);
+            saveCart();
+            renderCartItems();
+            showToast(`Đã xóa "${productName}" khỏi giỏ hàng`);
+        }
+        
+        // Cập nhật tổng đơn hàng
+        function updateOrderSummary() {
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const discount = 0; // Có thể thêm logic tính giảm giá ở đây
+            const total = subtotal - discount;
+            
+            document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+            document.getElementById('discount').textContent = formatCurrency(discount);
+            document.getElementById('total').textContent = formatCurrency(total);
+        }
+        
+        // Lưu giỏ hàng vào localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        
+        // Xử lý thanh toán
+        function handleCheckout() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng của bạn đang trống!');
+                return;
+            }
+            
+            // Kiểm tra thông tin khách hàng
+            const customerName = document.querySelector('.customer-info input[type="text"]').value;
+            const customerPhone = document.querySelector('.customer-info input[type="tel"]').value;
+            
+            if (!customerName || !customerPhone) {
+                alert('Vui lòng nhập đầy đủ thông tin khách hàng!');
+                return;
+            }
+            
+            // Trong thực tế, đây sẽ là nơi gửi đơn hàng đến server
+            alert('Đơn hàng của bạn đã được đặt thành công!');
+            
+            // Xóa giỏ hàng sau khi đặt hàng thành công
+            cart = [];
+            saveCart();
+            renderCartItems();
+        }
+        
+        // Khởi tạo khi trang được tải
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            renderCartItems();
+            
+            // Thêm sự kiện cho nút thanh toán
+            document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
+            
+            // Thêm sự kiện cho nút áp dụng voucher
+            document.querySelector('.apply-voucher').addEventListener('click', function() {
+                alert('Voucher đã được áp dụng!');
+            });
+        });
+    </script>
+</body>
+</html>

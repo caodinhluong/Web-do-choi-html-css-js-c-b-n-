@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - ToyStore</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --primary-dark: #357abd;
+            --primary-light: #6ba8ff;
+            --secondary-color: #5dbea3;
+            --accent-color: #ff9f43;
+            --text-color: #2d3748;
+            --light-text: #ffffff;
+            --background-color: #f8fafc;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-img {
+            width: 55px;
+            height: 55px;
+            margin-right: 15px;
+            border-radius: 14px;
+            object-fit: contain;
+            padding: 9px;
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.25);
+            transition: var(--transition);
+            border: 3px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.15) rotate(8deg);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .user-actions a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            border: 2.5px solid transparent;
+            letter-spacing: 0.2px;
+            background: rgba(74, 144, 226, 0.08);
+        }
+
+        .user-actions a:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.35);
+            border-color: var(--primary-color);
+        }
+
+        .user-actions a i {
+            margin-right: 10px;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .user-actions a:hover i {
+            transform: scale(1.2);
+        }
+
+        nav {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 18px 0;
+            box-shadow: 0 6px 25px rgba(74, 144, 226, 0.2);
+            position: relative;
+        }
+
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-light), rgba(255,255,255,0.8), var(--primary-light));
+            opacity: 0.7;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            padding: 14px 28px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .breadcrumb {
+            padding: 25px 0;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .breadcrumb li {
+            font-size: 15px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 15px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .breadcrumb .current {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        /* Registration Section */
+        .registration-section {
+            padding: 60px 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1.5px solid #f1f5f9;
+        }
+
+        .registration-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 60px 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .registration-left h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .registration-left p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .benefits-list i {
+            margin-right: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .registration-right {
+            flex: 1;
+            padding: 60px 40px;
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .registration-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .registration-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 15px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .checkbox-group input {
+            margin-top: 5px;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .checkbox-group a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 18px 45px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 35px rgba(74, 144, 226, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-size: 17px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transition: 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 18px 45px rgba(74, 144, 226, 0.6);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        }
+
+        .btn-google {
+            background: white;
+            color: var(--text-color);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn-google:hover {
+            background: #f8fafc;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-google img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 30px;
+            color: #64748b;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: var(--light-text);
+            padding: 80px 0 35px;
+            position: relative;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 45px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 28px;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 4px;
+            background: var(--primary-light);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-column p {
+            color: #cbd5e0;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-light);
+            padding-left: 10px;
+            transform: translateX(5px);
+        }
+
+        .footer-column ul li i {
+            margin-right: 12px;
+            width: 22px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-6px) scale(1.15);
+            box-shadow: 0 12px 30px rgba(74, 144, 226, 0.5);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 35px;
+            border-top: 1.5px solid rgba(255, 255, 255, 0.15);
+            font-size: 15px;
+            color: #94a3b8;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 25px;
+            }
+
+            .user-actions {
+                margin-top: 15px;
+                gap: 12px;
+            }
+
+            .user-actions a {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            nav ul li {
+                margin: 4px;
+            }
+
+            nav ul li a {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .registration-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+
+            .registration-left {
+                padding: 40px 30px;
+            }
+
+            .registration-right {
+                padding: 40px 30px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 1.7rem;
+            }
+
+            .logo-img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .registration-left h2 {
+                font-size: 2rem;
+            }
+
+            .registration-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="Home.html"><img src="img/logo1.png" alt="ToyStore" class="logo-img1" style="height: 50px; width: auto; max-height: 100%; vertical-align: middle; transition: all 0.3s ease;"></a>
+                    ToyStore
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm đồ chơi, thương hiệu...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#" id="login-btn"><i class="fas fa-user"></i> Đăng nhập</a>
+                    <a href="register.html" ><i class="fas fa-user-plus"></i> Đăng ký</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span class="cart-count">3</span></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="Home.html">Trang chủ</a></li>
+                    <li><a href="product.html">Đồ chơi mới</a></li>
+                    <li><a href="#">Bán chạy</a></li>
+                    <li><a href="#">Lắp ráp</a></li>
+                    <li><a href="#">Giáo dục</a></li>
+                    <li><a href="#">Ngoài trời</a></li>
+                    <li><a href="#">Thiếu nhi</a></li>
+                    <li><a href="#">Giảm giá</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Registration Section -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="registration-container">
+                <div class="registration-left">
+                    <h2>Tham Gia Cộng Đồng ToyStore</h2>
+                    <p>Tạo tài khoản để nhận nhiều ưu đãi đặc biệt và trải nghiệm mua sắm tốt nhất cho bé yêu của bạn.</p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-gift"></i> Nhận ưu đãi đặc biệt cho thành viên mới</li>
+                        <li><i class="fas fa-shipping-fast"></i> Miễn phí vận chuyển cho đơn hàng đầu tiên</li>
+                        <li><i class="fas fa-tag"></i> Giảm giá đặc biệt cho thành viên</li>
+                        <li><i class="fas fa-bell"></i> Thông báo sớm về sản phẩm mới</li>
+                        <li><i class="fas fa-history"></i> Theo dõi lịch sử mua hàng</li>
+                    </ul>
+                </div>
+                <div class="registration-right">
+                    <div class="registration-header">
+                        <h1>Tạo Tài Khoản</h1>
+                        <p>Điền thông tin để đăng ký tài khoản mới</p>
+                    </div>
+                    <form class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Họ</label>
+                                <input type="text" id="firstName" placeholder="Nhập họ của bạn" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Tên</label>
+                                <input type="text" id="lastName" placeholder="Nhập tên của bạn" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Nhập địa chỉ email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" id="password" placeholder="Tạo mật khẩu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác nhận mật khẩu</label>
+                            <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">Ngày sinh</label>
+                            <input type="date" id="birthday">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Giới tính</label>
+                            <select id="gender">
+                                <option value="">Chọn giới tính</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" checked>
+                            <label for="newsletter">Tôi muốn nhận thông tin khuyến mãi và sản phẩm mới qua email</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">Tôi đồng ý với <a href="#">Điều khoản sử dụng</a> và <a href="#">Chính sách bảo mật</a> của ToyStore</label>
+                        </div>
+                        <button type="submit" class="btn">Đăng Ký</button>
+                        <div class="login-link">
+                            Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Về Chúng Tôi</h3>
+                    <p>ToyStore là cửa hàng đồ chơi trực tuyến hàng đầu, cung cấp đa dạng các loại đồ chơi an toàn và chất lượng cho mọi lứa tuổi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Đồ chơi mới</a></li>
+                        <li><a href="#">Bán chạy</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Chính Sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Đường Đỗ Thế Diên, Phường Mỹ Hào, Hưng Yên</li>
+                        <li><i class="fas fa-phone"></i> (028) 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> MinhHai@toystore.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 22:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ToyStore. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/home.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.registration-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Mật khẩu xác nhận không khớp!');
+                    return;
+                }
+                
+                // Simulate successful registration
+                alert('Đăng ký thành công! Chào mừng bạn đến với ToyStore.');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

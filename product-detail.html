@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xe Điều Khiển Từ Xa - ToyStore</title>
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        /* CSS từ phần trước giữ nguyên */
+        .breadcrumb-nav {
+            background: white;
+            padding: 15px 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .breadcrumb {
+            background: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark);
+        }
+
+        .breadcrumb-item.active {
+            color: #64748b;
+        }
+
+        .product-detail-section {
+            background: white;
+            padding: 40px 0;
+        }
+
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .product-images {
+            position: sticky;
+            top: 100px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 2px solid #f1f5f9;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .thumbnail.active,
+        .thumbnail:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        .product-price-section {
+            margin-bottom: 25px;
+        }
+
+        .current-price {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            margin-left: 12px;
+            font-weight: 600;
+        }
+
+        .discount-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .product-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+
+        .product-features {
+            margin-bottom: 30px;
+        }
+
+        .product-features h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #64748b;
+        }
+
+        .features-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .quantity-section {
+            margin-bottom: 25px;
+        }
+
+        .quantity-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quantity-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .quantity-input {
+            width: 70px;
+            height: 45px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add-to-cart:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-buy-now {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+        }
+
+        .btn-buy-now:hover {
+            background: #ff8c1a;
+            transform: translateY(-2px);
+        }
+
+        .product-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .social-share {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .share-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: var(--primary-color);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Product Tabs */
+        .product-tabs-section {
+            background: #f8fafc;
+            padding: 50px 0;
+            margin-top: 40px;
+        }
+
+        .tabs-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .tab-content p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #64748b;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--text-color);
+            width: 40%;
+        }
+
+        /* PHẦN SẢN PHẨM LIÊN QUAN ĐÃ THIẾT KẾ LẠI */
+        .related-products-section {
+            padding: 60px 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-badge.new {
+            background: var(--primary-color);
+        }
+
+        .product-img {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            background: white;
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-view-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .product-category {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 8px;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .stars .far {
+            color: #e2e8f0;
+        }
+
+        .rating-count {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .view-all-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .product-images {
+                position: static;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .product-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tabs-header {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                text-align: left;
+                border-bottom: 1px solid #e2e8f0;
+                border-left: 3px solid transparent;
+            }
+
+            .tab-btn.active {
+                border-left-color: var(--primary-color);
+                border-bottom-color: #e2e8f0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-title {
+                font-size: 1.6rem;
+            }
+
+            .current-price {
+                font-size: 1.8rem;
+            }
+
+            .thumbnail-images {
+                flex-wrap: wrap;
+            }
+
+            .quantity-controls {
+                justify-content: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .toast {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-150%);
+            }
+            
+            .toast.show {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="Home.html"><img src="img/logo1.png" alt="ToyStore" class="logo-img1" style="height: 50px; width: auto; max-height: 100%; vertical-align: middle; transition: all 0.3s ease;"></a>
+                    ToyStore
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm đồ chơi, thương hiệu...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#" id="login-btn"><i class="fas fa-user"></i> Đăng nhập</a>
+                    <a href="register.html" id="register-btn"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                    <a href="cart.html" id="cart-btn"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="Home.html">Trang chủ</a></li>
+                    <li><a href="product.html">Đồ chơi mới</a></li>
+                    <li><a href="#">Bán chạy</a></li>
+                    <li><a href="#">Lắp ráp</a></li>
+                    <li><a href="#">Giáo dục</a></li>
+                    <li><a href="#">Ngoài trời</a></li>
+                    <li><a href="#">Thiếu nhi</a></li>
+                    <li><a href="#">Giảm giá</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
+    </div>
+
+    <!-- Chi tiết sản phẩm -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="product-detail-container">
+                <!-- Hình ảnh sản phẩm -->
+                <div class="product-images">
+                    <img id="mainImage" src="img/sp3.png" alt="Xe Điều Khiển Từ Xa" class="main-image">
+                    <div class="thumbnail-images">
+                        <img src="img/sp2.png" alt="Hình 1" class="thumbnail active" onclick="changeImage(this)">
+                        <img src="img/sp3.png" alt="Hình 2" class="thumbnail" onclick="changeImage(this)">
+                        <img src="img/sp04.png" alt="Hình 3" class="thumbnail" onclick="changeImage(this)">
+                        <img src="img/sp04.png" alt="Hình 4" class="thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+                
+                <!-- Thông tin sản phẩm -->
+                <div class="product-info">
+                    <h1 class="product-title">Xe Điều Khiển Từ Xa Cao Cấp - Mẫu Đua Địa Hình</h1>
+                    
+                    <div class="product-price-section">
+                        <span class="current-price">4.600.000đ</span>
+                        <span class="old-price">5.200.000đ</span>
+                        <span class="discount-badge">-12%</span>
+                    </div>
+                    
+                    <div class="product-description">
+                        <p>Xe điều khiển từ xa cao cấp với thiết kế thể thao, động cơ mạnh mẽ và khả năng vận hành linh hoạt trên mọi địa hình. Sản phẩm hoàn hảo cho trẻ em và cả người lớn yêu thích tốc độ.</p>
+                    </div>
+                    
+                    <div class="product-features">
+                        <h4>Đặc điểm nổi bật:</h4>
+                        <ul class="features-list">
+                            <li>Điều khiển từ xa 2.4GHz, phạm vi lên đến 100m</li>
+                            <li>Tốc độ tối đa 25km/h, thời gian sử dụng pin lên đến 40 phút</li>
+                            <li>Thiết kế chống nước, có thể chạy trên cỏ, đất, cát</li>
+                            <li>Đèn LED chiếu sáng, hệ thống treo độc lập</li>
+                            <li>Pin sạc Li-Po, thời gian sạc 2-3 giờ</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quantity-section">
+                        <span class="quantity-label">Số lượng:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus" onclick="decreaseQuantity()">-</button>
+                            <input type="number" id="quantity" value="1" min="1" class="quantity-input">
+                            <button class="quantity-btn plus" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-add-to-cart" onclick="addToCart()">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                        </button>
+                        <button class="btn-buy-now" onclick="buyNow()">
+                            Mua ngay
+                        </button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Giao hàng miễn phí</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-undo-alt"></i>
+                            <span>Đổi trả 7 ngày</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Bảo hành 12 tháng</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-share">
+                        <span class="share-label">Chia sẻ:</span>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab thông tin chi tiết -->
+    <section class="product-tabs-section">
+        <div class="container">
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="openTab('description')">Mô tả sản phẩm</button>
+                    <button class="tab-btn" onclick="openTab('specs')">Thông số kỹ thuật</button>
+                    <button class="tab-btn" onclick="openTab('reviews')">Đánh giá</button>
+                </div>
+                
+                <div id="description" class="tab-content active">
+                    <h3>Mô tả chi tiết</h3>
+                    <p>Xe điều khiển từ xa cao cấp với thiết kế thể thao đẹp mắt, phù hợp cho cả trẻ em và người lớn. Sản phẩm được làm từ chất liệu nhựa ABS cao cấp, bền bỉ và chịu lực tốt.</p>
+                    <p>Với động cơ mạnh mẽ, xe có thể đạt tốc độ tối đa 25km/h, hoạt động ổn định trên nhiều địa hình khác nhau như đường nhựa, cỏ, đất, cát. Hệ thống treo độc lập giúp xe vận hành mượt mà ngay cả trên địa hình gồ ghề.</p>
+                    <p>Xe sử dụng pin Li-Po dung lượng cao, thời gian sử dụng lên đến 40 phút sau mỗi lần sạc đầy. Bộ điều khiển sử dụng tần số 2.4GHz, cho phép nhiều xe hoạt động cùng lúc mà không bị nhiễu sóng.</p>
+                </div>
+                
+                <div id="specs" class="tab-content">
+                    <h3>Thông số kỹ thuật</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Kích thước</td>
+                            <td>35cm x 20cm x 15cm</td>
+                        </tr>
+                        <tr>
+                            <td>Trọng lượng</td>
+                            <td>1.2kg</td>
+                        </tr>
+                        <tr>
+                            <td>Tốc độ tối đa</td>
+                            <td>25km/h</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian sạc</td>
+                            <td>2-3 giờ</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian sử dụng</td>
+                            <td>40 phút</td>
+                        </tr>
+                        <tr>
+                            <td>Phạm vi điều khiển</td>
+                            <td>100m</td>
+                        </tr>
+                        <tr>
+                            <td>Độ tuổi khuyến nghị</td>
+                            <td>8+</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="reviews" class="tab-content">
+                    <h3>Đánh giá từ khách hàng</h3>
+                    <p>Đang cập nhật đánh giá...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SẢN PHẨM LIÊN QUAN ĐÃ ĐƯỢC THIẾT KẾ LẠI -->
+    <section class="related-products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sản phẩm liên quan</h2>
+                <p>Khám phá thêm các sản phẩm đồ chơi điều khiển từ xa khác</p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge">-15%</div>
+                    <div class="product-img">
+                        <img src="img/sp1.png" alt="Xe Điều Khiển Địa Hình">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn" onclick="quickView(1)">Xem nhanh</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Xe Điều Khiển Địa Hình</h3>
+                        <p class="product-category">Đồ chơi điều khiển</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(24)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">3.850.000đ</span>
+                                <span class="old-price">4.500.000đ</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCartFromCard(1, 'Xe Điều Khiển Địa Hình', 'img/sp1.png', 3850000, 4500000)"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge new">Mới</div>
+                    <div class="product-img">
+                        <img src="img/sp05.png" alt="Drone Mini Thông Minh">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn" onclick="quickView(2)">Xem nhanh</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Drone Mini Thông Minh</h3>
+                        <p class="product-category">Đồ chơi điều khiển</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(18)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">2.990.000đ</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCartFromCard(2, 'Drone Mini Thông Minh', 'img/sp05.png', 2990000, 0)"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-badge">-10%</div>
+                    <div class="product-img">
+                        <img src="img/sp2.png" alt="Xe Điều Khiển Tốc Độ Cao">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn" onclick="quickView(3)">Xem nhanh</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Xe Điều Khiển Tốc Độ Cao</h3>
+                        <p class="product-category">Đồ chơi điều khiển</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(32)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">5.200.000đ</span>
+                                <span class="old-price">5.800.000đ</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCartFromCard(3, 'Xe Điều Khiển Tốc Độ Cao', 'img/sp2.png', 5200000, 5800000)"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="view-all-container">
+                <a href="product.html" class="view-all-btn">Xem tất cả sản phẩm <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Về Chúng Tôi</h3>
+                    <p>ToyStore là cửa hàng đồ chơi trực tuyến hàng đầu, cung cấp đa dạng các loại đồ chơi an toàn và chất lượng cho mọi lứa tuổi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="Home.html">Trang chủ</a></li>
+                        <li><a href="#">Đồ chơi mới</a></li>
+                        <li><a href="#">Bán chạy</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Chính Sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Đường Đỗ Thế Diên, Phường Mỹ Hào, Hưng Yên</li>
+                        <li><i class="fas fa-phone"></i> (028) 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@toystore.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 22:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ToyStore. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Khởi tạo giỏ hàng từ localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        // Hiển thị thông báo
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Thêm sản phẩm vào giỏ hàng
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const product = {
+                id: 0, // ID sản phẩm chính
+                name: 'Xe Điều Khiển Từ Xa Cao Cấp - Mẫu Đua Địa Hình',
+                image: 'img/sp04.png',
+                price: 4600000,
+                oldPrice: 5200000,
+                quantity: quantity
+            };
+            
+            addProductToCart(product);
+            showToast(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+        }
+        
+        // Thêm sản phẩm từ card vào giỏ hàng
+        function addToCartFromCard(id, name, image, price, oldPrice) {
+            const product = {
+                id: id,
+                name: name,
+                image: image,
+                price: price,
+                oldPrice: oldPrice,
+                quantity: 1
+            };
+            
+            addProductToCart(product);
+            showToast(`Đã thêm "${name}" vào giỏ hàng!`);
+        }
+        
+        // Hàm chung để thêm sản phẩm vào giỏ hàng
+        function addProductToCart(product) {
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+            
+            if (existingProductIndex !== -1) {
+                // Nếu sản phẩm đã tồn tại, tăng số lượng
+                cart[existingProductIndex].quantity += product.quantity;
+            } else {
+                // Nếu sản phẩm chưa tồn tại, thêm mới
+                cart.push(product);
+            }
+            
+            // Lưu vào localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Cập nhật số lượng hiển thị
+            updateCartCount();
+        }
+        
+        // Mua ngay
+        function buyNow() {
+            addToCart();
+            // Chuyển hướng đến trang thanh toán
+            setTimeout(() => {
+                window.location.href = 'cart.html';
+            }, 1000);
+        }
+        
+        // Thay đổi hình ảnh chính
+        function changeImage(element) {
+            document.getElementById('mainImage').src = element.src;
+            
+            // Xóa class active từ tất cả thumbnail
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            
+            // Thêm class active vào thumbnail được click
+            element.classList.add('active');
+        }
+        
+        // Tăng số lượng
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        }
+        
+        // Giảm số lượng
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+
+        // Tab functionality
+        function openTab(tabName) {
+            // Ẩn tất cả tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Xóa active class từ tất cả tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Hiển thị tab được chọn và thêm active class
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Hàm xem nhanh sản phẩm
+        function quickView(productId) {
+            alert(`Xem nhanh sản phẩm ID: ${productId}`);
+            // Trong thực tế, đây sẽ mở modal hiển thị thông tin sản phẩm
+        }
+        
+        // Khởi tạo khi trang được tải
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

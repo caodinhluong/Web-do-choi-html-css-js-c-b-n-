@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToyStore - Thiên đường đồ chơi</title>
+    <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #3b82f6;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 576px) {
+            .toast {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-150%);
+            }
+            
+            .toast.show {
+                transform: translateY(0);
+            }
+        }
+
+        .christmas-section {
+            background-image: url('img/GS1.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 60px 0;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            
+        }
+
+        .christmas-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .christmas-title h2 {
+            font-size: 2.8rem;
+            color: #510707;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-weight: 800;
+        }
+
+        .christmas-title .subtitle {
+            font-size: 1.2rem;
+            color: #ff0000;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .christmas-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #c41e3a 0%, #ff4d6d 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+        }
+
+        /* Style cho giá sale giáng sinh */
+        .christmas-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #c41e3a;
+        }
+
+        .original-price {
+            font-size: 0.9rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .add-to-cart-christmas {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #c41e3a 0%, #ff4d6d 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .add-to-cart-christmas:hover {
+            background: linear-gradient(135deg, #a81c34 0%, #e04363 100%);
+            transform: translateY(-2px);
+        }
+
+        .see-more-christmas {
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .see-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c41e3a;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .see-more-btn:hover {
+            background: transparent;
+            color: #c41e3a;
+            transform: translateY(-2px);
+        }
+
+        /* Countdown Timer */
+        .countdown-timer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timer-title {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 70px;
+        }
+
+        .time-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .christmas-title h2 {
+                font-size: 2rem;
+            }
+            
+            .timer {
+                gap: 10px;
+            }
+            
+            .time-unit {
+                min-width: 60px;
+            }
+            
+            .time-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .christmas-section {
+                padding: 40px 0;
+            }
+            
+            .christmas-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timer {
+                flex-wrap: wrap;
+            }
+        }
+
+        .christmas-section .product-card {
+            position: relative;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .christmas-section .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .christmas-section .product-img {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .christmas-section .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .christmas-section .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .christmas-section .product-info {
+            padding: 15px;
+        }
+
+        .christmas-section .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .christmas-section .product-category {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="Home.html"><img src="img/logo1.png" alt="ToyStore" class="logo-img1" style="height: 50px; width: auto; max-height: 100%; vertical-align: middle; transition: all 0.3s ease;"></a>
+                    ToyStore
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm đồ chơi, thương hiệu...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="login.html" id="login-btn"><i class="fas fa-user"></i> Đăng nhập</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="">Trang chủ</a></li>
+                    <li><a href="product.html">Đồ chơi mới</a></li>
+                    <li><a href="#">Bán chạy</a></li>
+                    <li><a href="#">Lắp ráp</a></li>
+                    <li><a href="#">Giáo dục</a></li>
+                    <li><a href="#">Ngoài trời</a></li>
+                    <li><a href="#">Thiếu nhi</a></li>
+                    <li><a href="#">Giảm giá</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>Thiên Đường Đồ Chơi</h1>
+            <p>Khám phá thế giới đồ chơi đa dạng với hàng ngàn sản phẩm chất lượng. Tìm kiếm, mua sắm và mang về niềm vui bất tận cho bé yêu.</p>
+            <a href="#" class="btn">Khám phá ngay</a>
+        </div>
+    </section>
+    
+
+    <section class="christmas-section">
+        <div class="container">
+            <div class="countdown-timer">
+                <div class="timer-title">ƯU ĐÃI KẾT THÚC SAU:</div>
+                <div class="timer">
+                    <div class="time-unit">
+                        <span class="time-number" id="days">10</span>
+                        <span class="time-label">NGÀY</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="hours">21</span>
+                        <span class="time-label">GIỜ</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="minutes">22</span>
+                        <span class="time-label">PHÚT</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="seconds">50</span>
+                        <span class="time-label">GIÂY</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="christmas-products">
+                <!-- Product 1 - Dùng cùng class product-card như section sản phẩm nổi bật -->
+                <div class="product-card">
+                    <div class="sale-badge">GIẢM SỐC</div>
+                    <div class="product-img">
+                        <img src="https://via.placeholder.com/400x250/1a472a/ffffff?text=BRUDER+Bộ+Xe+Tải" alt="BRUDER Bộ Xe Tải">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Bộ xe tải chở hàng hóa & lắp ráp công trình BRUDER</h3>
+                        <p class="product-category">SKU: BRU02483</p>
+                        <div class="christmas-price">
+                            <span class="current-price">1.539.300đ</span>
+                            <span class="original-price">2.199.000đ</span>
+                            <span class="discount-badge">-30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="sale-badge">HOT</div>
+                    <div class="product-img">
+                        <img src="https://via.placeholder.com/400x250/c41e3a/ffffff?text=VECTO+Strike" alt="VECTO Strike">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Người máy biến hình Strike VECTO VTK4</h3>
+                        <p class="product-category">SKU: VTK4</p>
+                        <div class="christmas-price">
+                            <span class="current-price">699.300đ</span>
+                            <span class="original-price">999.000đ</span>
+                            <span class="discount-badge">-30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="sale-badge">GIẢM 50%</div>
+                    <div class="product-img">
+                        <img src="https://via.placeholder.com/400x250/ffd700/333333?text=PEEKABOO+Xe+Tập+Đi" alt="PEEKABOO Xe Tập Đi">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Xe tập đi 3 trong 1 cho bé PEEKABOO</h3>
+                        <p class="product-category">SKU: EU461542</p>
+                        <div class="christmas-price">
+                            <span class="current-price">916.300đ</span>
+                            <span class="original-price">1.309.000đ</span>
+                            <span class="discount-badge">-30%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="see-more-christmas">
+                <a href="#" class="see-more-btn">XEM TẤT CẢ ƯU ĐÃI GIÁNG SINH</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Sản Phẩm Nổi Bật</h2>
+        </div>
+        <div class="products-grid" >
+            <a href="product-detail.html" style="text-decoration: none;">
+                <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp3.png" alt="Xe điều khiển từ xa">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Xe điều khiển từ xa</h3>
+                    <p class="product-category">Đồ chơi vận động</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">4.600.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(1, 'Xe điều khiển từ xa', 'img/sp3.png', 4600000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp05.png" alt="Robot Thông minh">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Robot Thông minh</h3>
+                    <p class="product-category">Đồ chơi giáo dục</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">780.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(2, 'Robot Thông minh', 'img/sp05.png', 780000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp2.png" alt="Búp bê Barbie">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Búp bê Barbie</h3>
+                    <p class="product-category">Đồ chơi thiếu nhi</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">320.000đ</span>
+                            <span class="old-price">380.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(3, 'Búp bê Barbie', 'img/sp2.png', 320000, 380000)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp1.png" alt="Bộ Lego Creator">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bộ Lego Creator</h3>
+                    <p class="product-category">Đồ chơi lắp ráp</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">450.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(4, 'Bộ Lego Creator', 'img/sp1.png', 450000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Sản Phẩm Mới</h2>
+        </div>
+        <div class="products-grid" >
+            <a href="product-detail.html" style="text-decoration: none;">
+                <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp3.png" alt="Xe điều khiển từ xa">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Xe điều khiển từ xa</h3>
+                    <p class="product-category">Đồ chơi vận động</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">4.600.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(1, 'Xe điều khiển từ xa', 'img/sp3.png', 4600000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp05.png" alt="Robot Thông minh">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Robot Thông minh</h3>
+                    <p class="product-category">Đồ chơi giáo dục</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">780.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(2, 'Robot Thông minh', 'img/sp05.png', 780000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp2.png" alt="Búp bê Barbie">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Búp bê Barbie</h3>
+                    <p class="product-category">Đồ chơi thiếu nhi</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">320.000đ</span>
+                            <span class="old-price">380.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(3, 'Búp bê Barbie', 'img/sp2.png', 320000, 380000)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp1.png" alt="Bộ Lego Creator">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bộ Lego Creator</h3>
+                    <p class="product-category">Đồ chơi lắp ráp</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">450.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(4, 'Bộ Lego Creator', 'img/sp1.png', 450000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="products-grid" >
+            <a href="product-detail.html" style="text-decoration: none;">
+                <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp3.png" alt="Xe điều khiển từ xa">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Xe điều khiển từ xa</h3>
+                    <p class="product-category">Đồ chơi vận động</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">4.600.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(1, 'Xe điều khiển từ xa', 'img/sp3.png', 4600000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp05.png" alt="Robot Thông minh">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Robot Thông minh</h3>
+                    <p class="product-category">Đồ chơi giáo dục</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">780.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(2, 'Robot Thông minh', 'img/sp05.png', 780000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp2.png" alt="Búp bê Barbie">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Búp bê Barbie</h3>
+                    <p class="product-category">Đồ chơi thiếu nhi</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">320.000đ</span>
+                            <span class="old-price">380.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(3, 'Búp bê Barbie', 'img/sp2.png', 320000, 380000)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="img/sp1.png" alt="Bộ Lego Creator">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bộ Lego Creator</h3>
+                    <p class="product-category">Đồ chơi lắp ráp</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">450.000đ</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromHome(4, 'Bộ Lego Creator', 'img/sp1.png', 450000, 0)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Danh Mục Đồ Chơi</h2>
+            </div>
+            <div class="categories-container">
+                <div class="categories">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3>Lắp ráp</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Robot</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Xe đồ chơi</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <h3>Board Game</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>Ngoài trời</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Giáo dục</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Về Chúng Tôi</h3>
+                    <p>ToyStore là cửa hàng đồ chơi trực tuyến hàng đầu, cung cấp đa dạng các loại đồ chơi an toàn và chất lượng cho mọi lứa tuổi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Đồ chơi mới</a></li>
+                        <li><a href="#">Bán chạy</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Chính Sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Đường Đỗ Thế Diên, Phường Mỹ Hào, Hưng Yên</li>
+                        <li><i class="fas fa-phone"></i> (028) 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> MinhHai@toystore.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 22:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ToyStore. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Giỏ Hàng</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-modal-items">
+            </div>
+            <div class="cart-total">
+                <h3 id="cart-modal-total">Tổng cộng: 0đ</h3>
+            </div>
+            <button class="btn" style="width: 100%; margin-top: 20px;" onclick="window.location.href='cart.html'">Xem Giỏ Hàng</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function addToCartFromHome(id, name, image, price, oldPrice) {
+            const product = {
+                id: id,
+                name: name,
+                image: image,
+                price: price,
+                oldPrice: oldPrice,
+                quantity: 1
+            };
+            
+            addProductToCart(product);
+            showToast(`Đã thêm "${name}" vào giỏ hàng!`);
+            updateCartModal();
+        }
+        
+        function addChristmasProduct(id, name, image, price, oldPrice) {
+            const product = {
+                id: id,
+                name: name,
+                image: image,
+                price: price,
+                oldPrice: oldPrice,
+                quantity: 1
+            };
+            
+            addProductToCart(product);
+            showToast(`Đã thêm "${name}" vào giỏ hàng!`);
+            updateCartModal();
+        }
+        
+        function addProductToCart(product) {
+            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+            
+            if (existingProductIndex !== -1) {
+                cart[existingProductIndex].quantity += product.quantity;
+            } else {
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            updateCartCount();
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
+        }
+        
+        function updateCartModal() {
+            const container = document.getElementById('cart-modal-items');
+            const totalElement = document.getElementById('cart-modal-total');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="empty-cart-message">Giỏ hàng của bạn đang trống</p>';
+                totalElement.textContent = 'Tổng cộng: 0đ';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h4>${item.name}</h4>
+                            <p>${formatCurrency(item.price)} x ${item.quantity}</p>
+                        </div>
+                        <div class="item-total">${formatCurrency(itemTotal)}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            totalElement.textContent = `Tổng cộng: ${formatCurrency(total)}`;
+        }
+        
+        function setupCartModal() {
+            const cartBtn = document.querySelector('a[href="cart.html"]');
+            const cartModal = document.getElementById('cart-modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            if (cartBtn) {
+                cartBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    updateCartModal();
+                    cartModal.style.display = 'block';
+                });
+            }
+            
+            if (closeButtons.length > 0) {
+                closeButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        cartModal.style.display = 'none';
+                    });
+                });
+            }
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date('2024-12-31T23:59:59').getTime();
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
+
+            if (timeLeft < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            setupCartModal();
+            updateCartModal();
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
