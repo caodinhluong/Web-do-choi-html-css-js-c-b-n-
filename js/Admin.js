@@ -14,92 +14,8 @@
     REPORTS: 'kidtoystore_reports'
   };
 
-  // Dữ liệu mẫu ban đầu - CẢI THIỆN
-  const defaultData = {
-    products: [
-      {
-        id: 1,
-        code: "#TOY001",
-        name: "Xe Điều Khiển Từ Xa",
-        category: "Đồ Chơi Công Nghệ",
-        price: 450000,
-        stock: 45,
-        sold: 142,
-        description: "Xe điều khiển từ xa 2.4GHz, pin sạc, điều khiển từ xa",
-        createdAt: "2024-01-15",
-        image: "img/sp3.png"
-      },
-      {
-        id: 2,
-        code: "#TOY002",
-        name: "Bộ Xếp Hình Thông Minh",
-        category: "Đồ Chơi Giáo Dục",
-        price: 320000,
-        stock: 28,
-        sold: 128,
-        description: "200 mảnh ghép, phát triển tư duy cho trẻ 3-8 tuổi",
-        createdAt: "2024-02-10",
-        image: "img/sp05.png"
-      },
-      {
-        id: 3,
-        code: "#TOY003",
-        name: "Robot Biến Hình",
-        category: "Đồ Chơi Hành Động",
-        price: 680000,
-        stock: 12,
-        sold: 98,
-        description: "Robot biến hình thành xe, có đèn và âm thanh",
-        createdAt: "2024-03-05",
-        image: "img/sp6.png"
-      },
-      {
-        id: 4,
-        code: "#TOY004",
-        name: "Búp Bê Biết Nói",
-        category: "Đồ Chơi Cho Bé Gái",
-        price: 250000,
-        stock: 32,
-        sold: 87,
-        description: "Búp bê biết nói 50 câu, có quần áo thay đổi",
-        createdAt: "2024-01-20",
-        image: "img/sp2.png"
-      },
-      {
-        id: 5,
-        code: "#TOY005",
-        name: "Bộ Lắp Ghép LEGO",
-        category: "Đồ Chơi Sáng Tạo",
-        price: 1200000,
-        stock: 8,
-        sold: 76,
-        description: "Bộ LEGO 1000 mảnh, dành cho trẻ từ 8 tuổi trở lên",
-        createdAt: "2024-02-25",
-        image: "img/sp1.png"
-      }
-    ],
-    categories: [
-      { id: 1, code: "#CAT001", name: "Đồ Chơi Công Nghệ", productCount: 45, description: "Đồ chơi ứng dụng công nghệ hiện đại", status: "active", createdAt: "2023-12-01", icon: "car" },
-      { id: 2, code: "#CAT002", name: "Đồ Chơi Giáo Dục", productCount: 38, description: "Đồ chơi phát triển trí tuệ cho trẻ", status: "active", createdAt: "2023-12-05", icon: "puzzle-piece" },
-      { id: 3, code: "#CAT003", name: "Đồ Chơi Hành Động", productCount: 52, description: "Đồ chơi mô hình, siêu nhân, robot", status: "active", createdAt: "2023-12-10", icon: "robot" },
-      { id: 4, code: "#CAT004", name: "Đồ Chơi Cho Bé Gái", productCount: 41, description: "Búp bê, đồ chơi nấu ăn, trang điểm", status: "active", createdAt: "2023-12-15", icon: "baby" },
-      { id: 5, code: "#CAT005", name: "Đồ Chơi Sáng Tạo", productCount: 29, description: "Đồ chơi lắp ghép, xếp hình, vẽ tranh", status: "active", createdAt: "2023-12-20", icon: "cubes" }
-    ],
-    orders: [
-      { id: 1, code: "#TOY-2456", customer: "Nguyễn Văn A", customerPhone: "0912345678", date: "15/05/2024", items: 3, total: 850000, status: "completed", products: ["Xe Điều Khiển Từ Xa", "Búp Bê Biết Nói"], shippingAddress: "123 Đường ABC, Quận 1, TP.HCM", paymentMethod: "COD" },
-      { id: 2, code: "#TOY-2455", customer: "Trần Thị B", customerPhone: "0923456789", date: "14/05/2024", items: 5, total: 1250000, status: "processing", products: ["Bộ Xếp Hình Thông Minh", "Robot Biến Hình"], shippingAddress: "456 Đường XYZ, Quận 2, TP.HCM", paymentMethod: "Chuyển khoản" },
-      { id: 3, code: "#TOY-2454", customer: "Lê Văn C", customerPhone: "0934567890", date: "13/05/2024", items: 2, total: 560000, status: "pending", products: ["Xe Điều Khiển Từ Xa"], shippingAddress: "789 Đường DEF, Quận 3, TP.HCM", paymentMethod: "COD" },
-      { id: 4, code: "#TOY-2453", customer: "Phạm Thị D", customerPhone: "0945678901", date: "12/05/2024", items: 7, total: 2340000, status: "completed", products: ["Bộ Lắp Ghép LEGO", "Robot Biến Hình"], shippingAddress: "321 Đường GHI, Quận 4, TP.HCM", paymentMethod: "Thẻ tín dụng" },
-      { id: 5, code: "#TOY-2452", customer: "Hoàng Văn E", customerPhone: "0956789012", date: "11/05/2024", items: 1, total: 720000, status: "cancelled", products: ["Robot Biến Hình"], shippingAddress: "654 Đường JKL, Quận 5, TP.HCM", paymentMethod: "COD" }
-    ],
-    users: [
-      { id: 1, code: "#USER001", name: "Nguyễn Văn A", email: "nguyenvana@email.com", phone: "0912345678", role: "customer", joinDate: "15/03/2024", status: "active", totalOrders: 5, totalSpent: 3250000, address: "123 Đường ABC, Quận 1, TP.HCM" },
-      { id: 2, code: "#USER002", name: "Trần Thị B", email: "tranthib@email.com", phone: "0923456789", role: "customer", joinDate: "22/02/2024", status: "active", totalOrders: 3, totalSpent: 2150000, address: "456 Đường XYZ, Quận 2, TP.HCM" },
-      { id: 3, code: "#USER003", name: "Lê Văn C", email: "levanc@email.com", phone: "0934567890", role: "customer", joinDate: "10/01/2024", status: "active", totalOrders: 7, totalSpent: 4850000, address: "789 Đường DEF, Quận 3, TP.HCM" },
-      { id: 4, code: "#USER004", name: "Phạm Thị D", email: "phamthid@email.com", phone: "0945678901", role: "admin", joinDate: "05/12/2023", status: "active", totalOrders: 12, totalSpent: 0, address: "321 Đường GHI, Quận 4, TP.HCM" },
-      { id: 5, code: "#USER005", name: "Hoàng Văn E", email: "hoangvane@email.com", phone: "0956789012", role: "customer", joinDate: "28/11/2023", status: "active", totalOrders: 9, totalSpent: 6250000, address: "654 Đường JKL, Quận 5, TP.HCM" }
-    ]
-  };
+  // Dữ liệu mẫu ban đầu - TÁCH RA FILE MOCKDATA
+  const defaultData = window.mockData;
 
   // State - lấy từ localStorage hoặc dùng mẫu
   // Clear old blob URLs and reset to default data with file paths
@@ -120,6 +36,12 @@
       category: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.CATEGORIES)) || defaultData.categories).map(c => c.id)) + 1,
       order: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || defaultData.orders).map(o => o.id)) + 1,
       user: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || defaultData.users).map(u => u.id)) + 1
+    },
+    pagination: {
+      products: { currentPage: 1, itemsPerPage: 10 },
+      categories: { currentPage: 1, itemsPerPage: 10 },
+      orders: { currentPage: 1, itemsPerPage: 10 },
+      users: { currentPage: 1, itemsPerPage: 10 }
     }
   };
 
@@ -634,10 +556,14 @@
         </tr>
         `;
       $('#addFirstProduct')?.addEventListener('click', openAddProduct);
+      renderPagination('products', list);
       return;
     }
 
-    list.forEach(product => {
+    // Get paginated data
+    const paginatedList = getPaginatedData(list, 'products');
+
+    paginatedList.forEach(product => {
       const stockStatus = product.stock <= (product.minStock || 10) ? 'low' :
         product.stock < 20 ? 'warning' : 'normal';
       const statusText = product.status === 'active' ? 'Đang bán' :
@@ -699,6 +625,9 @@
         `;
       tbody.appendChild(row);
     });
+
+    // Render pagination
+    renderPagination('products', list);
   }
 
   function renderCategoriesTable(list = state.categories) {
@@ -723,10 +652,14 @@
         </tr>
       `;
       $('#addFirstCategory')?.addEventListener('click', openAddCategory);
+      renderPagination('categories', list);
       return;
     }
 
-    list.forEach(category => {
+    // Get paginated data
+    const paginatedList = getPaginatedData(list, 'categories');
+
+    paginatedList.forEach(category => {
       const statusClass = category.status === 'active' ? 'status-completed' : 'status-cancelled';
       const statusText = category.status === 'active' ? 'Hiển thị' : 'Ẩn';
       const productCount = state.products.filter(p => p.category === category.name).length;
@@ -763,6 +696,9 @@
       `;
       tbody.appendChild(row);
     });
+
+    // Render pagination
+    renderPagination('categories', list);
   }
 
   function renderOrdersTable(list = state.orders) {
@@ -783,10 +719,14 @@
           </td>
         </tr>
       `;
+      renderPagination('orders', list);
       return;
     }
 
-    list.forEach(order => {
+    // Get paginated data
+    const paginatedList = getPaginatedData(list, 'orders');
+
+    paginatedList.forEach(order => {
       const statusClass = order.status === 'completed' ? 'status-completed' :
         order.status === 'processing' ? 'status-processing' :
           order.status === 'pending' ? 'status-pending' : 'status-cancelled';
@@ -823,6 +763,9 @@
       `;
       tbody.appendChild(row);
     });
+
+    // Render pagination
+    renderPagination('orders', list);
   }
 
   function renderUsersTable(list = state.users) {
@@ -847,10 +790,14 @@
         </tr>
       `;
       $('#addFirstUser')?.addEventListener('click', openAddUser);
+      renderPagination('users', list);
       return;
     }
 
-    list.forEach(user => {
+    // Get paginated data
+    const paginatedList = getPaginatedData(list, 'users');
+
+    paginatedList.forEach(user => {
       const roleClass = user.role === 'admin' ? 'status-processing' : 'status-completed';
       const roleText = user.role === 'admin' ? 'Quản trị' : user.role === 'staff' ? 'Nhân viên' : 'Khách hàng';
       const statusText = user.status === 'active' ? 'Hoạt động' : 'Không hoạt động';
@@ -889,6 +836,9 @@
       `;
       tbody.appendChild(row);
     });
+
+    // Render pagination
+    renderPagination('users', list);
   }
 
   function renderRecentOrders() {
@@ -928,31 +878,6 @@
     });
   }
 
-  function renderTopProducts() {
-    const container = $('.top-products-list');
-    if (!container) return;
-
-    const topProducts = state.products
-      .sort((a, b) => b.sold - a.sold)
-      .slice(0, 5);
-
-    container.innerHTML = '';
-    topProducts.forEach((product, index) => {
-      const item = document.createElement('div');
-      item.className = 'product-item';
-      item.innerHTML = `
-        <div class="product-rank">${index + 1}</div>
-        <div class="product-img">
-            <i class="fas fa-${product.image || 'cube'}"></i>
-        </div>
-        <div class="product-info">
-            <h4>${product.name}</h4>
-            <small>${formatCurrency(product.price * product.sold)}</small>
-        </div>
-        `;
-      container.appendChild(item);
-    });
-  }
 
   function renderTopProductsDashboard() {
     const container = $('.top-products-list');
@@ -969,7 +894,10 @@
       item.innerHTML = `
       <div class="product-rank">${index + 1}</div>
       <div class="product-img">
-        <i class="fas fa-${product.image || 'cube'}"></i>
+        ${product.image && product.image !== 'cube' && !product.image.startsWith('fa-') ?
+          `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; border-radius: 8px; object-fit: cover;">` :
+          `<i class="fas fa-${product.image || 'cube'}"></i>`
+        }
       </div>
       <div class="product-info">
         <h4>${product.name}</h4>
@@ -1194,24 +1122,20 @@
       return;
     }
 
-    // Handle image
+    // Handle image - Store as data URL for demo purposes
     let image = 'cube'; // default icon
     const imageFile = $('#productImage').files[0];
-    if (imageFile) {
-      // Generate filename and use img folder path
-      const filename = generateImageFilename(imageFile.name);
-      image = `img/${filename}`;
+    const previewImg = $('#previewImg');
 
-      // In a real application, you would upload the file to the server here
-      // For demo purposes, we'll just use the path
-      showNotification('Lưu ý: Trong ứng dụng thực tế, file sẽ được upload lên server!', 'info');
+    if (imageFile && previewImg && previewImg.src && previewImg.src.startsWith('data:')) {
+      // Use the data URL from the preview for demo purposes
+      image = previewImg.src;
     }
 
     if (id) {
       // Update existing product
       const index = state.products.findIndex(p => p.id === id);
       if (index !== -1) {
-        const oldImage = state.products[index].image;
         state.products[index] = {
           ...state.products[index],
           name,
@@ -1224,11 +1148,9 @@
           description,
           status,
           featured,
-          image: imageFile ? image : (state.products[index].image || 'cube'),
+          image: image,
           updatedAt: formatDate()
         };
-
-        // Note: No need to clean up old images since we're using file paths now
 
         showNotification('Cập nhật sản phẩm thành công!', 'success');
       }
@@ -1338,7 +1260,6 @@
 
       saveToStorage();
       renderProductsTable();
-      renderTopProducts();
       updateDashboardStats();
     }
   }
@@ -1892,6 +1813,86 @@
   }
 
   /* =========================
+     PAGINATION FUNCTIONS
+     ========================= */
+  function getPaginatedData(data, type) {
+    const pagination = state.pagination[type];
+    const startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage;
+    const endIndex = startIndex + pagination.itemsPerPage;
+    return data.slice(startIndex, endIndex);
+  }
+
+  function getTotalPages(data, type) {
+    const pagination = state.pagination[type];
+    return Math.ceil(data.length / pagination.itemsPerPage);
+  }
+
+  function renderPagination(type, data) {
+    const totalPages = getTotalPages(data, type);
+    const currentPage = state.pagination[type].currentPage;
+
+    if (totalPages <= 1) {
+      // Hide pagination if only one page or less
+      const paginationContainer = $(`#${type}Pagination`);
+      if (paginationContainer) {
+        paginationContainer.innerHTML = '';
+      }
+      return;
+    }
+
+    const paginationHTML = `
+      <div class="pagination">
+        <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" data-action="prev" data-type="${type}">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        ${Array.from({ length: totalPages }, (_, i) => i + 1)
+        .map(page => `
+            <button class="pagination-btn ${page === currentPage ? 'active' : ''}" data-page="${page}" data-type="${type}">
+              ${page}
+            </button>
+          `).join('')}
+
+        <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" data-action="next" data-type="${type}">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    `;
+
+    const paginationContainer = $(`#${type}Pagination`);
+    if (paginationContainer) {
+      paginationContainer.innerHTML = paginationHTML;
+    }
+  }
+
+  function changePage(type, page) {
+    const totalPages = getTotalPages(state[type], type);
+    if (page < 1 || page > totalPages) return;
+
+    state.pagination[type].currentPage = page;
+
+    // Re-render the table
+    switch (type) {
+      case 'products':
+        renderProductsTable();
+        break;
+      case 'categories':
+        renderCategoriesTable();
+        break;
+      case 'orders':
+        renderOrdersTable();
+        break;
+      case 'users':
+        renderUsersTable();
+        break;
+    }
+  }
+
+  function resetPagination(type) {
+    state.pagination[type].currentPage = 1;
+  }
+
+  /* =========================
      9) SEARCH & FILTER
      ========================= */
   function initSearch() {
@@ -1923,6 +1924,7 @@
 
   function searchProducts(term) {
     if (!term) {
+      resetPagination('products');
       renderProductsTable();
       return;
     }
@@ -1934,11 +1936,13 @@
       (product.description || '').toLowerCase().includes(term)
     );
 
+    resetPagination('products');
     renderProductsTable(filtered);
   }
 
   function searchCategories(term) {
     if (!term) {
+      resetPagination('categories');
       renderCategoriesTable();
       return;
     }
@@ -1948,11 +1952,13 @@
       (category.description || '').toLowerCase().includes(term)
     );
 
+    resetPagination('categories');
     renderCategoriesTable(filtered);
   }
 
   function searchOrders(term) {
     if (!term) {
+      resetPagination('orders');
       renderOrdersTable();
       return;
     }
@@ -1963,11 +1969,13 @@
       order.customerPhone.toLowerCase().includes(term)
     );
 
+    resetPagination('orders');
     renderOrdersTable(filtered);
   }
 
   function searchUsers(term) {
     if (!term) {
+      resetPagination('users');
       renderUsersTable();
       return;
     }
@@ -1979,6 +1987,7 @@
       user.code.toLowerCase().includes(term)
     );
 
+    resetPagination('users');
     renderUsersTable(filtered);
   }
 
@@ -1994,11 +2003,13 @@
 
   function filterOrdersByStatus(status) {
     if (status === 'all') {
+      resetPagination('orders');
       renderOrdersTable();
       return;
     }
 
     const filtered = state.orders.filter(order => order.status === status);
+    resetPagination('orders');
     renderOrdersTable(filtered);
   }
 
@@ -2300,6 +2311,24 @@
       showNotification('Tính năng xem trước đang được phát triển!', 'info');
     });
 
+    // Pagination event listeners
+    document.addEventListener('click', function (e) {
+      const paginationBtn = e.target.closest('.pagination-btn');
+      if (!paginationBtn) return;
+
+      const type = paginationBtn.getAttribute('data-type');
+      const action = paginationBtn.getAttribute('data-action');
+      const page = parseInt(paginationBtn.getAttribute('data-page'));
+
+      if (action === 'prev') {
+        changePage(type, state.pagination[type].currentPage - 1);
+      } else if (action === 'next') {
+        changePage(type, state.pagination[type].currentPage + 1);
+      } else if (page) {
+        changePage(type, page);
+      }
+    });
+
     // Close modals with Escape key
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
@@ -2309,7 +2338,29 @@
   }
 
   /* =========================
-     13) INITIALIZATION
+     13) SCROLL HEADER EFFECT
+     ========================= */
+  function initScrollHeader() {
+    const header = $('.topbar');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', function () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down - hide header
+        header.classList.add('header-hidden');
+      } else {
+        // Scrolling up - show header
+        header.classList.remove('header-hidden');
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+  }
+
+  /* =========================
+     14) INITIALIZATION
      ========================= */
   // Trong hàm init()
   function init() {
@@ -2321,6 +2372,7 @@
     initSearch();
     initOrderFilter();
     initDarkMode();
+    initScrollHeader();
 
     // Initial render
     renderProductsTable();

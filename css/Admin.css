@@ -954,7 +954,7 @@ body {
 }
 
 .topbar {
-    background-color: var(--nav-blue); 
+    background-color: var(--nav-blue);
     padding: 0 30px;
     display: flex;
     justify-content: space-between;
@@ -963,6 +963,15 @@ body {
     z-index: 10;
     height: 70px;
     border-bottom: 1px solid var(--secondary-blue);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: transform 0.3s ease;
+}
+
+.topbar.header-hidden {
+    transform: translateY(-100%);
 }
 
 .topbar-left {
@@ -1113,7 +1122,7 @@ body {
 
 .content {
     flex: 1;
-    padding: 30px;
+    padding: 100px 30px 30px 30px;
     overflow-y: auto;
 }
 
@@ -1407,8 +1416,8 @@ body {
 
     .sidebar {
         width: 70px;
-        position: static;
-        height: auto;
+        position: fixed;
+        height: 100vh;
     }
 
     .sidebar-header h2, .menu-item span {
@@ -1434,7 +1443,7 @@ body {
     }
 
     .main-content {
-        margin-left: 0;
+        margin-left: 70px;
     }
 }
 
@@ -1456,17 +1465,28 @@ body {
     .stats-cards {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .search-box {
         display: none;
     }
-    
+
     .content {
-        padding: 20px;
+        padding: 100px 20px 20px 90px;
     }
-    
+
     .notification {
         display: none;
+    }
+
+    .sidebar {
+        width: 70px;
+        position: fixed;
+        height: 100vh;
+        z-index: 100;
+    }
+
+    .main-content {
+        margin-left: 70px;
     }
 }
 
@@ -1474,13 +1494,28 @@ body {
     .stats-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .topbar {
         padding: 0 15px;
     }
-    
+
     .user-details {
         display: none;
+    }
+
+    .content {
+        padding: 100px 15px 15px 85px;
+    }
+
+    .sidebar {
+        width: 70px;
+        position: fixed;
+        height: 100vh;
+        z-index: 100;
+    }
+
+    .main-content {
+        margin-left: 70px;
     }
 }
 
@@ -1575,8 +1610,15 @@ body {
     border-color: var(--primary-blue);
 }
 
-.pagination-btn:hover:not(.active) {
+.pagination-btn:hover:not(.active):not(.disabled) {
     background-color: var(--light-blue);
+}
+
+.pagination-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--gray-medium);
+    color: var(--gray-dark);
 }
 
 .form-group {
