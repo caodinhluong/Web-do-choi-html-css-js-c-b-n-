@@ -27,7 +27,7 @@
         sold: 142,
         description: "Xe điều khiển từ xa 2.4GHz, pin sạc, điều khiển từ xa",
         createdAt: "2024-01-15",
-        image: "car"
+        image: "img/sp3.png"
       },
       {
         id: 2,
@@ -39,7 +39,7 @@
         sold: 128,
         description: "200 mảnh ghép, phát triển tư duy cho trẻ 3-8 tuổi",
         createdAt: "2024-02-10",
-        image: "puzzle-piece"
+        image: "img/sp05.png"
       },
       {
         id: 3,
@@ -51,7 +51,7 @@
         sold: 98,
         description: "Robot biến hình thành xe, có đèn và âm thanh",
         createdAt: "2024-03-05",
-        image: "robot"
+        image: "img/sp6.png"
       },
       {
         id: 4,
@@ -63,7 +63,7 @@
         sold: 87,
         description: "Búp bê biết nói 50 câu, có quần áo thay đổi",
         createdAt: "2024-01-20",
-        image: "baby"
+        image: "img/sp2.png"
       },
       {
         id: 5,
@@ -75,7 +75,7 @@
         sold: 76,
         description: "Bộ LEGO 1000 mảnh, dành cho trẻ từ 8 tuổi trở lên",
         createdAt: "2024-02-25",
-        image: "cubes"
+        image: "img/sp1.png"
       }
     ],
     categories: [
@@ -102,13 +102,21 @@
   };
 
   // State - lấy từ localStorage hoặc dùng mẫu
+  // Clear old blob URLs and reset to default data with file paths
+  let savedProducts = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS));
+  if (savedProducts && savedProducts.some(p => p.image && p.image.startsWith('blob:'))) {
+    // Clear localStorage if it contains blob URLs
+    localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
+    savedProducts = null;
+  }
+
   const state = {
-    products: JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || defaultData.products,
+    products: savedProducts || defaultData.products,
     categories: JSON.parse(localStorage.getItem(STORAGE_KEYS.CATEGORIES)) || defaultData.categories,
     orders: JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || defaultData.orders,
     users: JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || defaultData.users,
     ids: {
-      product: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || defaultData.products).map(p => p.id)) + 1,
+      product: Math.max(...((savedProducts || defaultData.products).map(p => p.id))) + 1,
       category: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.CATEGORIES)) || defaultData.categories).map(c => c.id)) + 1,
       order: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || defaultData.orders).map(o => o.id)) + 1,
       user: Math.max(...(JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || defaultData.users).map(u => u.id)) + 1
@@ -648,7 +656,7 @@
         <td>
             <div class="product-cell">
             <div class="product-img-small">
-                ${product.image && product.image !== 'cube' ?
+                ${product.image && product.image !== 'cube' && !product.image.startsWith('fa-') ?
           `<img src="${product.image}" alt="${product.name}" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">` :
           `<i class="fas fa-${product.image || 'cube'}"></i>`
         }
@@ -1007,7 +1015,7 @@
     const productImage = $('#detailProductImage');
     const productIcon = $('#detailProductIcon');
 
-    if (product.image && product.image !== 'cube') {
+    if (product.image && product.image !== 'cube' && !product.image.startsWith('fa-')) {
       productImage.src = product.image;
       productImage.style.display = 'block';
       productIcon.style.display = 'none';
@@ -1190,8 +1198,13 @@
     let image = 'cube'; // default icon
     const imageFile = $('#productImage').files[0];
     if (imageFile) {
-      // In a real app, you'd upload to server. For demo, we'll use object URL
-      image = URL.createObjectURL(imageFile);
+      // Generate filename and use img folder path
+      const filename = generateImageFilename(imageFile.name);
+      image = `img/${filename}`;
+
+      // In a real application, you would upload the file to the server here
+      // For demo purposes, we'll just use the path
+      showNotification('Lưu ý: Trong ứng dụng thực tế, file sẽ được upload lên server!', 'info');
     }
 
     if (id) {
@@ -1215,10 +1228,7 @@
           updatedAt: formatDate()
         };
 
-        // Clean up old object URL if it was created by us
-        if (oldImage && oldImage.startsWith('blob:') && oldImage !== image) {
-          URL.revokeObjectURL(oldImage);
-        }
+        // Note: No need to clean up old images since we're using file paths now
 
         showNotification('Cập nhật sản phẩm thành công!', 'success');
       }
@@ -1285,6 +1295,13 @@
       }
     };
     reader.readAsDataURL(file);
+  }
+
+  // Generate unique filename for uploaded image
+  function generateImageFilename(originalName) {
+    const timestamp = Date.now();
+    const extension = originalName.split('.').pop();
+    return `product_${timestamp}.${extension}`;
   }
   function showDeleteProductDialog(id) {
     const product = state.products.find(p => p.id === id);
@@ -1668,7 +1685,7 @@
 
       itemDiv.innerHTML = `
         <div class="order-item-icon">
-          ${product && product.image && product.image !== 'cube' ?
+          ${product && product.image && product.image !== 'cube' && !product.image.startsWith('fa-') ?
           `<img src="${product.image}" alt="${productName}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">` :
           `<i class="fas fa-${product ? product.image || 'cube' : 'cube'}"></i>`
         }
